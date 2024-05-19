@@ -36,7 +36,7 @@ public class Main : MonoBehaviour
                 // Mantener la posición horizontal de la cámara
                 posicionObjetivo.x = posicionInicial.x;
                 posicionObjetivo.y = posicionInicial.y;
-                posicionObjetivo.z = posicionObjetivo.z - 1f;
+                posicionObjetivo.z = posicionObjetivo.z - 2f;
 
                 // Suavizar el movimiento de la cámara hacia la posición del personaje
                 Vector3 nuevaPosicion = Vector3.Lerp(transform.position, posicionObjetivo, Suavidad * Time.deltaTime);
