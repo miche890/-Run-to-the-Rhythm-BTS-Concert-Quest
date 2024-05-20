@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     public float JumpForce;
     private bool isGrounded; // Variable para verificar si el personaje está en el suelo
     private Animator animator;
+    public AudioSource footstepAudioSource; // AudioSource para los efectos de caminar
+    public AudioSource ambientAudioSource; // AudioSource para la musica ambiente
+    public float footstepResumeDelay = 1.5f; // Tiempo de espera antes de reanudar el sonido de los pasos
 
     void Awake()
     {
@@ -20,6 +23,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        footstepAudioSource.Stop(); // Asegurarse de que el sonido no se reproduzca al inicio
+        ambientAudioSource.Stop(); // Asegurarse de que el sonido no se reproduzca al inicio
+
     }
 
     // Update is called once per frame
@@ -27,6 +33,8 @@ public class Player : MonoBehaviour
     {
         if (this.isStarted)
         {
+            footstepAudioSource.Play();
+            ambientAudioSource.Play();
             // Obtener la entrada del teclado
             float movimientoHorizontal = Input.GetAxis("Horizontal");
             // float movimientoVertical = Input.GetAxis("Vertical");
@@ -51,6 +59,7 @@ public class Player : MonoBehaviour
                     // Cambiar la animación de salto
                     animator.SetBool("Jump", true); // Cambiar a la animación de salto
                     StartJumpAnimation();
+                    footstepAudioSource.Pause();
                 }
             }
         }
@@ -77,6 +86,10 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.26f); // Ajusta el tiempo según la duración de la animación de salto
         animator.SetBool("Jump", false);
+        // Esperar el tiempo especificado antes de reanudar el sonido de los pasos
+        yield return new WaitForSeconds(footstepResumeDelay);
+        footstepAudioSource.UnPause();
+        
     }
 
     void StartJumpAnimation()

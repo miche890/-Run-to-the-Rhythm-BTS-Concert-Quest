@@ -9,6 +9,7 @@ public class Main : MonoBehaviour
     public Transform Objetivo; // Referencia al transform del personaje que seguirá la cámara
     public float Suavidad; // Valor para suavizar el movimiento de la cámara
     private Vector3 posicionInicial; // Posición inicial de la cámara
+    public AudioSource backgroundMusicAudioSource; // AudioSource para la música de fondo
 
     void Awake()
     {
@@ -18,7 +19,7 @@ public class Main : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Guardar la posición inicial de la cámara
+        backgroundMusicAudioSource.Play(); // Reproduce la música de fondo siempre
         posicionInicial = transform.position;
     }
 
