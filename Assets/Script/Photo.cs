@@ -8,8 +8,11 @@ public class Photo : MonoBehaviour
 {
     public TMP_Text Contador;
 
+    [SerializeField] private AudioClip audioClip;
+
     private void OnTriggerEnter(Collider other)
     {
+        SoundController.Instance.EjecutarSonido(audioClip);
         Destroy(gameObject);
         int valorActual = int.Parse(Contador.text);
         valorActual++;
