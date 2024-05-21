@@ -11,8 +11,9 @@ public class Player : MonoBehaviour
     private bool isGrounded; // Variable para verificar si el personaje está en el suelo
     private Animator animator;
     public AudioSource footstepAudioSource; // AudioSource para los efectos de caminar
-    public AudioSource ambientAudioSource; // AudioSource para la musica ambiente
-    public float footstepResumeDelay = 1.5f; // Tiempo de espera antes de reanudar el sonido de los pasos
+    public float footstepResumeDelay = 1.0f; // Tiempo de espera antes de reanudar el sonido de los pasos
+    private bool isFootstepPlaying = false;
+
 
     void Awake()
     {
@@ -24,8 +25,6 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         footstepAudioSource.Stop(); // Asegurarse de que el sonido no se reproduzca al inicio
-        ambientAudioSource.Stop(); // Asegurarse de que el sonido no se reproduzca al inicio
-
     }
 
     // Update is called once per frame
@@ -33,11 +32,9 @@ public class Player : MonoBehaviour
     {
         if (this.isStarted)
         {
-            footstepAudioSource.Play();
-            ambientAudioSource.Play();
+           
             // Obtener la entrada del teclado
             float movimientoHorizontal = Input.GetAxis("Horizontal");
-            // float movimientoVertical = Input.GetAxis("Vertical");
             float movimientoVertical = 0.5f;
 
             // Calcular el vector de movimiento
@@ -45,7 +42,17 @@ public class Player : MonoBehaviour
 
             // Aplicar el movimiento al personaje
             transform.Translate(movimiento);
-
+            
+            // Reproducir el sonido de los pasos si se está moviendo, está en el suelo y no está ya reproduciendo el sonido
+            CheckGrounded();
+            if (movimiento != Vector3.zero && !isFootstepPlaying && isGrounded)
+            {
+                StartSound();
+            }
+            else if ((movimiento == Vector3.zero || !isGrounded) && isFootstepPlaying)
+            {
+                StopSound();
+            }
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -59,7 +66,6 @@ public class Player : MonoBehaviour
                     // Cambiar la animación de salto
                     animator.SetBool("Jump", true); // Cambiar a la animación de salto
                     StartJumpAnimation();
-                    footstepAudioSource.Pause();
                 }
             }
         }
@@ -86,15 +92,32 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.26f); // Ajusta el tiempo según la duración de la animación de salto
         animator.SetBool("Jump", false);
-        // Esperar el tiempo especificado antes de reanudar el sonido de los pasos
-        yield return new WaitForSeconds(footstepResumeDelay);
-        footstepAudioSource.UnPause();
         
+        // Esperar antes de reanudar el sonido de los pasos
+        yield return new WaitForSeconds(footstepResumeDelay);
+        CheckGrounded();
+        if (isGrounded && transform.hasChanged) // Verificar si ha aterrizado y si está en movimiento
+        {
+            StartSound();
+        }
     }
 
     void StartJumpAnimation()
     {
+        StopSound(); // Detener sonido de los pasos al iniciar salto
         StartCoroutine(ResetJumpAnimation());
+    }
+
+    private void StartSound()
+    {
+        isFootstepPlaying = true;
+        footstepAudioSource.Play();
+    }
+
+    private void StopSound()
+    {
+        isFootstepPlaying = false;
+        footstepAudioSource.Stop();
     }
 
 }
