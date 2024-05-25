@@ -10,6 +10,7 @@ public class Main : MonoBehaviour
     public float Suavidad; // Valor para suavizar el movimiento de la cámara
     private Vector3 posicionInicial; // Posición inicial de la cámara
     public AudioSource backgroundMusicAudioSource; // AudioSource para la música de fondo
+    public AudioSource ambientAudioSource; // AudioSource para la musica ambiente
 
     void Awake()
     {
@@ -20,6 +21,7 @@ public class Main : MonoBehaviour
     void Start()
     {
         backgroundMusicAudioSource.Play(); // Reproduce la música de fondo siempre
+        ambientAudioSource.Stop(); // Asegurarse de que el sonido no se reproduzca al inicio
         posicionInicial = transform.position;
     }
 
@@ -31,6 +33,10 @@ public class Main : MonoBehaviour
             // Verificar que el objetivo esté asignado
             if (Objetivo != null)
             {
+                if (!ambientAudioSource.isPlaying) 
+                {
+                    StartSound();
+                }
                 // Obtener la posición actual del personaje
                 Vector3 posicionObjetivo = Objetivo.position;
 
@@ -57,5 +63,10 @@ public class Main : MonoBehaviour
     public static Main GetInstance()
     {
         return instance == null ? instance = new Main() : instance;
+    }
+
+    private void StartSound()
+    {
+        ambientAudioSource.Play();
     }
 }

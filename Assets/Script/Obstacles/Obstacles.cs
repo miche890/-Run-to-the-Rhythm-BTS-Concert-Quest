@@ -4,18 +4,20 @@ using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 
-public class Photo : MonoBehaviour
+public class Obstacles : MonoBehaviour
 {
     public TMP_Text Contador;
+    public int Puntos;
 
-    [SerializeField] private AudioClip audioClip;
+    // [SerializeField] private AudioClip audioClip;
 
     private void OnTriggerEnter(Collider other)
     {
-        SoundController.Instance.EjecutarSonido(audioClip);
+        // SoundController.Instance.EjecutarSonido(audioClip);
         Destroy(gameObject);
         int valorActual = int.Parse(Contador.text);
-        valorActual++;
+        valorActual -= Puntos;
         Contador.text = valorActual.ToString();
+
     }
 }
