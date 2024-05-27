@@ -31,6 +31,6 @@ public class CanvasGameController : MonoBehaviour
         CanvasGame.gameObject.SetActive(false);
         CanvasWelcome.gameObject.SetActive(true);
         Main.GetInstance().SetIsStarted(false);
-        Player.GetInstance().SetIsStarted(false);
+        PlayerLvlOne.GetInstance().SetIsStarted(false);
     }
 }
