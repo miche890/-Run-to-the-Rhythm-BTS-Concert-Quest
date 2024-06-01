@@ -6,9 +6,6 @@ public class Main : MonoBehaviour
 {
     private static Main instance;
     private bool isStarted = false;
-    public Transform Objetivo; // Referencia al transform del personaje que seguirá la cámara
-    public float Suavidad; // Valor para suavizar el movimiento de la cámara
-    private Vector3 posicionInicial; // Posición inicial de la cámara
     public AudioSource backgroundMusicAudioSource; // AudioSource para la música de fondo
     public AudioSource ambientAudioSource; // AudioSource para la musica ambiente
 
@@ -22,7 +19,6 @@ public class Main : MonoBehaviour
     {
         backgroundMusicAudioSource.Play(); // Reproduce la música de fondo siempre
         ambientAudioSource.Stop(); // Asegurarse de que el sonido no se reproduzca al inicio
-        posicionInicial = transform.position;
     }
 
     // Update is called once per frame
@@ -30,26 +26,9 @@ public class Main : MonoBehaviour
     {
         if (this.isStarted)
         {
-            // Verificar que el objetivo esté asignado
-            if (Objetivo != null)
+            if (!ambientAudioSource.isPlaying) 
             {
-                if (!ambientAudioSource.isPlaying) 
-                {
-                    StartSound();
-                }
-                // Obtener la posición actual del personaje
-                Vector3 posicionObjetivo = Objetivo.position;
-
-                // Mantener la posición horizontal de la cámara
-                posicionObjetivo.x = posicionInicial.x;
-                posicionObjetivo.y = posicionInicial.y;
-                posicionObjetivo.z = posicionObjetivo.z - 2f;
-
-                // Suavizar el movimiento de la cámara hacia la posición del personaje
-                Vector3 nuevaPosicion = Vector3.Lerp(transform.position, posicionObjetivo, Suavidad * Time.deltaTime);
-
-                // Aplicar la nueva posición a la cámara
-                transform.position = nuevaPosicion;
+                StartSound();
             }
         }
 
