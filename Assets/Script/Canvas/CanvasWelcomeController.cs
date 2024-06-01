@@ -30,7 +30,7 @@ public class CanvasWelcomeController : MonoBehaviour
         CanvasWelcome.gameObject.SetActive(false);
         CanvasGame.gameObject.SetActive(true);
         Main.GetInstance().SetIsStarted(true);
-        Player.GetInstance().SetIsStarted(true);
+        PlayerLvlOne.GetInstance().SetIsStarted(true);
         // Main.GetInstance().StartGame();
         
     }
