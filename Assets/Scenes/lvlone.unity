@@ -22300,12 +22300,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519490232}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 2.53, z: -2}
+  m_LocalRotation: {x: 0.13052616, y: -0, z: -0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 2.33, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1552121028}
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!114 &1519490237
 MonoBehaviour:
@@ -22319,8 +22319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63af382e0e6414848b99272f7f053a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Objetivo: {fileID: 1552121028}
-  Suavidad: 2
   backgroundMusicAudioSource: {fileID: 1519490239}
   ambientAudioSource: {fileID: 26945579}
 --- !u!82 &1519490239
@@ -23056,12 +23054,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5673fd61530e966448284343457076ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VelocidadMovimiento: 5
-  VelocidadRotacion: 200
+  VelocidadMovimiento: 4
+  VelocidadRotacion: 100
   x: 0
   y: 1
   rb: {fileID: 1552121030}
-  forceJump: 7
+  forceJump: 6
   puedoSaltar: 0
   footstepAudioSource: {fileID: 1552121033}
 --- !u!82 &1552121033
@@ -27881,6 +27879,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1970932afe6bbc24cb789f3e06f55992, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1773294735}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1970932afe6bbc24cb789f3e06f55992, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1519490236}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1970932afe6bbc24cb789f3e06f55992, type: 3}
       insertIndex: -1
@@ -32767,7 +32768,6 @@ BoxCollider:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1519490236}
   - {fileID: 1822867090}
   - {fileID: 1730890765}
   - {fileID: 26945578}
