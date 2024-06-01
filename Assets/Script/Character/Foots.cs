@@ -6,6 +6,7 @@ using UnityEngine;
 public class Foots : MonoBehaviour
 {
     public PlayerLvlOne playerLvlOne;
+    public PlayerLvlTwo playerLvlTwo;
     
     // Start is called before the first frame update
     void Start()
@@ -21,11 +22,23 @@ public class Foots : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        playerLvlOne.puedoSaltar = true;
+        if (playerLvlOne) {
+            playerLvlOne.puedoSaltar = true;
+        }
+
+        if (playerLvlTwo) {
+            playerLvlTwo.puedoSaltar = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        playerLvlOne.puedoSaltar = false;
+        if (playerLvlOne) {
+            playerLvlOne.puedoSaltar = false;
+        }
+
+        if (playerLvlTwo) {
+            playerLvlTwo.puedoSaltar = false;
+        }
     }
 }
