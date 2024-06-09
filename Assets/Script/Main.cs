@@ -9,6 +9,8 @@ public class Main : MonoBehaviour
     public AudioSource backgroundMusicAudioSource; // AudioSource para la música de fondo
     public AudioSource ambientAudioSource; // AudioSource para la musica ambiente
 
+    public AudioSource footStepAudioSource;
+
     void Awake()
     {
         instance = this;
@@ -29,6 +31,10 @@ public class Main : MonoBehaviour
             if (!ambientAudioSource.isPlaying) 
             {
                 StartSound();
+            }
+        } else {
+            if(footStepAudioSource.isPlaying) {
+                footStepAudioSource.Stop();
             }
         }
 

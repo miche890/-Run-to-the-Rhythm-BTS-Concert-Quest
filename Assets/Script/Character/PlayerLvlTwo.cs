@@ -37,18 +37,18 @@ public class PlayerLvlTwo : MonoBehaviour
     // Estandariza que las cosas ocurran al mismo tiemppo sin importar los cuadros a los que vaya el juego
     void FixedUpdate()
     {
-        // if (this.isStarted)
-        // {
+        if (this.isStarted)
+        {
             transform.Rotate(0, x * Time.deltaTime * VelocidadRotacion, 0);
             transform.Translate(0, 0, y * Time.deltaTime * VelocidadMovimiento);
-        // }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (this.isStarted)
-        // {   
+        if (this.isStarted)
+        {   
             x = Input.GetAxis("Horizontal");
             y = Input.GetAxis("Vertical");
 
@@ -80,7 +80,7 @@ public class PlayerLvlTwo : MonoBehaviour
                 EstoyCayendo();
             }
 
-        // }
+        }
     }
 
     public void SetIsStarted(bool isStarted)

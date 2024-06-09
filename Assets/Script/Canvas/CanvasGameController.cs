@@ -26,11 +26,19 @@ public class CanvasGameController : MonoBehaviour
         
     }
 
-    public void B_OnHandleButtonExit()
+    public void B_OnHandleButtonExitLvlOne()
     {
         CanvasGame.gameObject.SetActive(false);
         CanvasWelcome.gameObject.SetActive(true);
         Main.GetInstance().SetIsStarted(false);
         PlayerLvlOne.GetInstance().SetIsStarted(false);
+    }
+
+    public void B_OnHandleButtonExitLvlTwo()
+    {
+        CanvasGame.gameObject.SetActive(false);
+        CanvasWelcome.gameObject.SetActive(true);
+        Main.GetInstance().SetIsStarted(false);
+        PlayerLvlTwo.GetInstance().SetIsStarted(false);
     }
 }

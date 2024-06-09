@@ -25,14 +25,20 @@ public class CanvasWelcomeController : MonoBehaviour
         
     }
 
-    public void B_OnHandleButtonStart()
+    public void B_OnHandleButtonStartLvlOne()
     {
         CanvasWelcome.gameObject.SetActive(false);
         CanvasGame.gameObject.SetActive(true);
         Main.GetInstance().SetIsStarted(true);
         PlayerLvlOne.GetInstance().SetIsStarted(true);
-        // Main.GetInstance().StartGame();
-        
+    }
+
+    public void B_OnHandleButtonStartLvlTwo()
+    {
+        CanvasWelcome.gameObject.SetActive(false);
+        CanvasGame.gameObject.SetActive(true);
+        Main.GetInstance().SetIsStarted(true);
+        PlayerLvlTwo.GetInstance().SetIsStarted(true);
     }
 
     public static CanvasWelcomeController GetInstance()
